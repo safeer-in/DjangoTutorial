@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse as Response
 import hashlib
-from forms import LoginForm, RegistrationForm
-from models import User
+from .forms import LoginForm
+from .models import User
 # Create your views here.
 
 
@@ -18,13 +18,14 @@ def login(request):
 	if request.method == "POST":
 		form = LoginForm(request.POST)
 		if form.is_valid():
-			un = form.cleaned_data['username']
-			pw = form.cleaned_data['password']
+			email = form.cleaned_data['email']
+		 	password = form.cleaned_data['password']
 			h = hashlib.new("md5")
-			h.update(pw)
-			user = User.objects.filter(username=un,password=h.hexdigest())
+			h.update(password)
+			user = User.objects.filter(email=email,password=h.hexdigest()).first()
 			if user:
-				return render(request,"authorised.html",{"username":un})
+				request.session['user'] = user.email
+				return Response('You are authorized!')
 			else:
 				return Response("Invalid user")
 			
