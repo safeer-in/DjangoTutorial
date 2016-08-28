@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse as Response
 import hashlib
-from .forms import LoginForm
+from .forms import LoginForm,RegistrationForm
 from .models import User
 # Create your views here.
 

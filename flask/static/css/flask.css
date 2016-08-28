@@ -1,0 +1,12 @@
+h1{
+	font-size: 4em;
+	text-align: center;
+	font-weight: 800;
+	color: red;
+}
+
+table {
+	font-size: 2em;
+	width: 40%;
+	margin: auto;
+}
